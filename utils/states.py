@@ -6,3 +6,6 @@ class RegisterStates(StatesGroup):
     last_name = State()
     phone = State()
     address = State()
+
+class AvatarStates(StatesGroup):
+    user_avatar = State()

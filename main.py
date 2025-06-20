@@ -7,6 +7,7 @@ from aiogram.client.default import DefaultBotProperties
 from config import BOT_TOKEN
 from handlers.general import basic_router
 from handlers.reg_handlers import reg_router
+from handlers.user_photo_handler import user_photo_router
 from utils.my_commands import custom_commands
 
 
@@ -22,6 +23,7 @@ async def main():
     dp = Dispatcher()
     dp.include_routers(
         reg_router,
+        user_photo_router,
         basic_router,
     )
     await dp.start_polling(bot)

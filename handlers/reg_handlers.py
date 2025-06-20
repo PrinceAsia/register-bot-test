@@ -25,7 +25,7 @@ async def register_last_name(message: Message, state: FSMContext) -> None:
 
 @reg_router.message(RegisterStates.phone, F.contact)
 async def register_phone(message: Message, state: FSMContext) -> None:
-    await state.update_data(phone_number=message.contact.phone_number)
+    await state.update_data(phone=message.contact.phone_number)
     await state.set_state(RegisterStates.address)
     await message.answer(
         "Iltimos, endi manzilingizni yozing yoki location yuboring ...",
@@ -49,7 +49,14 @@ async def register_address(message: Message, state: FSMContext) -> None:
     info = await state.get_data()
 
     try:
-        db.update_any_col(message.from_user.id, list(info.keys()), list(info.values()))
+        db.register_user(
+            message.from_user.id,
+            info["first_name"],
+            info["last_name"],
+            info.get("address", None),
+            info.get("location", None),
+            info["phone"]
+        )
         await state.clear()
         await message.answer(
             f"Hurmatli {info['first_name']} {info['last_name']}, siz muvaffaqiyatli roýxatdan o'tdingiz!")

@@ -12,5 +12,13 @@ custom_commands = [
     BotCommand(
         command="register",
         description="Botdan roýxatdan o'tish",
+    ),
+    BotCommand(
+        command="set_avatar",
+        description="Avatar qo'shish",
+    ),
+    BotCommand(
+        command="my_avatar",
+        description="Mening avatarimni ko'rish",
     )
 ]
